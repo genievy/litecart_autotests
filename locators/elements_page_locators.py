@@ -40,3 +40,6 @@ class ListBoxPageLocators:
 
 class LinksPageLocators:
     pass
+
+class NewBoxPageLocators:
+    pass
