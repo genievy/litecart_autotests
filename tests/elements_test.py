@@ -8,7 +8,6 @@ class TestElements:
             text_box_page = TextBoxPage(driver, 'http://localhost/litecart/create_account')
             text_box_page.open()
             text_box_page.fill_textboxes()
-            text_box_page.check_alert()
 
         # def test_input_proposed_password(self, driver):
         #     text_box_page = TextBoxPage(driver, 'http://localhost/litecart/create_account')
