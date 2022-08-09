@@ -16,19 +16,20 @@ class TextBoxPage(BasePage):
         self.element_is_visible(self.locators.ADDRESS_2).send_keys('Gogol, 27')
         self.element_is_visible(self.locators.POSTAL_CODE).send_keys('109112')
         self.element_is_visible(self.locators.CITY).send_keys('Moscow')
-        self.element_is_visible(self.locators.EMAIL).send_keys('wqwerq@qwdfer.qwet')
+        self.element_is_visible(self.locators.EMAIL).send_keys('test@test.test')
         self.element_is_visible(self.locators.PHONE).send_keys('+79429899889')
         self.action_move_to_element(self.element_is_visible(self.locators.DESIRED_PASSWORD))
         self.action_click_and_hold(self.element_is_visible(self.locators.DESIRED_PASSWORD))
         time.sleep(1)
         self.action_release(self.element_is_visible(self.locators.DESIRED_PASSWORD))
-        self.element_is_visible(self.locators.DESIRED_PASSWORD).send_keys('auSrL3iW3wzCkRk')
-        self.element_is_presence(self.locators.CONFIRM_PASSWORD).send_keys('auSrL3iW3wzCkRk')
+        self.element_is_visible(self.locators.DESIRED_PASSWORD).send_keys('Password123')
+        self.element_is_presence(self.locators.CONFIRM_PASSWORD).send_keys('Password123')
         self.element_is_visible(self.locators.CAPTCHA).send_keys('5432')
-        self.element_is_visible(self.locators.CHECKBOX_1).click()
+        # "Включается" чек-бох, исполнением javascript-кода
+        self.checbox_switch(self.locators.CHECKBOX_1_JS)
+        # "Включается" чек-бох, методом click()
         self.element_is_visible(self.locators.CHECKBOX_2).click()
         self.go_to_element(self.element_is_visible(self.locators.CREATE_ACCOUNT_BUTTON))
-        # print(self.element_is_visible(self.locators.CREATE_ACCOUNT_BUTTON))
         # self.element_is_presence(self.locators.CREATE_ACCOUNT_BUTTON).click()
         time.sleep(3)
 
@@ -55,8 +56,18 @@ class AuthBoxPage(BasePage):
     locators = AuthBoxPageLocators()
 
     def fill_auth_box(self):
-        pass
+        self.element_is_visible(self.locators.SIGN_IN_DROPDOWN).click()
+        self.element_is_visible(self.locators.EMAIL).send_keys('test@test.test')
+        self.element_is_visible(self.locators.PASSWORD).send_keys('Password123')
+        self.checbox_switch(self.locators.CHECKBOX_JS)
+        # self.element_is_visible(self.locators.SIGN_IN_BUTTON).click()
+        time.sleep(3)
+
 
     def check_auth_form(self):
-        pass
+        email = self.element_is_visible(self.locators.EMAIL).get_attribute('value')
+        password = self.element_is_visible(self.locators.PASSWORD).get_attribute('value')
+        checkbox = self.element_is_visible(self.locators.CHECKBOX).get_attribute('checked')
+
+        return email, password, checkbox
 

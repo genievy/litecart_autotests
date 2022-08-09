@@ -21,6 +21,7 @@ class TextBoxPageLocators:
     COUNTRY_OPTION = (By.CSS_SELECTOR, "select.form-control[value='BY']")
     CAPTCHA = (By.CSS_SELECTOR, "[name='captcha']")
     CHECKBOX_1 = (By.CSS_SELECTOR, "[name='newsletter']")
+    CHECKBOX_1_JS = "[name=newsletter]"  # javascript-locator
     CHECKBOX_2 = (By.CSS_SELECTOR, "[name='terms_agreed']")
     CAPTCHA_ALERT = (By.CSS_SELECTOR, ".alert.alert-danger")
     CREATE_ACCOUNT_BUTTON = (By.CSS_SELECTOR, "[value='Create Account']")
@@ -29,15 +30,9 @@ class TextBoxPageLocators:
 class AuthBoxPageLocators:
     # sign_in
     SIGN_IN_DROPDOWN = (By.CSS_SELECTOR, "li.account.dropdown")
-    SIGN_IN_BUTTON = (By.CSS_SELECTOR, ".btn-group.btn-block>.btn.btn-default")
     EMAIL = (By.CSS_SELECTOR, "form[name='login_form']>div.form-group.required>div>input")
     PASSWORD = (By.XPATH, "//i[@class='fa fa-key fa-fw']/../..//input")
+    CHECKBOX = (By.CSS_SELECTOR, "[name='remember_me']")
+    CHECKBOX_JS = "[name=remember_me]"  # javascript-locator
+    SIGN_IN_BUTTON = (By.CSS_SELECTOR, ".btn-group.btn-block>.btn.btn-default")
 
-    pass
-
-
-class LinksPageLocators:
-    pass
-
-class NewBoxPageLocators:
-    pass

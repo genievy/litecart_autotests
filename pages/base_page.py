@@ -11,6 +11,10 @@ class BasePage:
     def open(self):
         return self.driver.get(self.url)
 
+    def find_element(self, element):
+        self.driver.find_element(element)
+
+    # Expected_conditions func
     def element_is_visible(self, locator, timeout=5):
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
@@ -32,8 +36,11 @@ class BasePage:
     def find_captcha(self, locator, timeout=5):
         return wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
 
-    def go_to_page_down(self):
-        self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+
+    # Execute_script func
+    def checbox_switch(self, js_locator):
+        scrpt = f'document.querySelector("{js_locator}").checked = true'
+        self.driver.execute_script(scrpt)
 
     def go_to_element(self, element):
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
@@ -41,9 +48,11 @@ class BasePage:
     def title_is(self):
         self.driver.execute_script("return document.querySelectorAll('title')[0]")
 
-    def find_element(self, element):
-        self.driver.find_element(element)
+    def go_to_page_down(self):
+        self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
 
+
+    # ActionChains func
     def action_move_to_element(self, element):
         action = ActionChains(self.driver)
         action.move_to_element(element)

@@ -18,6 +18,7 @@ class TestElements:
             text_box_page.open()
             text_box_page.fill_auth_box()
             text_box_page.check_auth_form()
+            print(text_box_page.check_auth_form())
 
 
 
