@@ -5,9 +5,10 @@ from generators.generator import random_custumer
 import time
 
 
+#  Проверка полей ввода регистрации
 class TextBoxPage(BasePage):
     locators = TextBoxPageLocators()
-
+    # Проверка заполнения полей ввода на странице /litecart/create_account
     def fill_textboxes(self):
         # person_info - переменная, которой присваивается значение ф-ции random_custumer()
         # всякий раз при обращении к ней
@@ -36,6 +37,7 @@ class TextBoxPage(BasePage):
         self.element_is_visible(self.locators.CITY).send_keys(city)
         self.element_is_visible(self.locators.EMAIL).send_keys(email)
         self.element_is_visible(self.locators.PHONE).send_keys(phone)
+        # Используем  класс ActionChains из библиотеки Selenium
         self.action_move_to_element(self.element_is_visible(self.locators.DESIRED_PASSWORD))
         self.action_click_and_hold(self.element_is_visible(self.locators.DESIRED_PASSWORD))
         time.sleep(1)
@@ -51,6 +53,7 @@ class TextBoxPage(BasePage):
         # self.element_is_presence(self.locators.CREATE_ACCOUNT_BUTTON).click()
         time.sleep(3)
 
+    #  Проверка соответствия введенных данных в поля ввода на странице /litecart/create_account
     def check_filled_form(self):
         company = self.element_is_visible(self.locators.COMPANY).get_attribute('value')
         tax_id = self.element_is_visible(self.locators.TAX_ID).get_attribute('value')
@@ -71,20 +74,26 @@ class TextBoxPage(BasePage):
         return company, tax_id, first_name, last_name, adress1, adress2, postal_code, email, city, phone, desired_password, confirm_password, captcha, checkbox_1, checkbox_2
 
 
+#  Проверка полей ввода авторизации
 class AuthBoxPage(BasePage):
     locators = AuthBoxPageLocators()
 
+    # Проверка заполнения полей ввода окна авторизации
     def fill_auth_box(self):
+        custumer_info = next(random_custumer())
+        email = custumer_info.email
+        password = custumer_info.password
         self.element_is_visible(self.locators.SIGN_IN_DROPDOWN).click()
-        self.element_is_visible(self.locators.EMAIL).send_keys('test@test.test')
-        self.element_is_visible(self.locators.PASSWORD).send_keys('Password123')
+        self.element_is_visible(self.locators.EMAIL).send_keys(email)
+        self.element_is_visible(self.locators.PASSWORD).send_keys(password)
         self.checkbox_switch(self.locators.CHECKBOX_JS)
         # self.element_is_visible(self.locators.SIGN_IN_BUTTON).click()
         time.sleep(3)
 
+    # Проверка соответствия введенных данных в поля ввода окна авторизации
     def check_auth_form(self):
         email = self.element_is_visible(self.locators.EMAIL).get_attribute('value')
         password = self.element_is_visible(self.locators.PASSWORD).get_attribute('value')
         checkbox = self.element_is_visible(self.locators.CHECKBOX).get_attribute('checked')
-
+        print(email, password, checkbox)
         return email, password, checkbox

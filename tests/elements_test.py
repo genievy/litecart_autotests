@@ -1,6 +1,7 @@
 from pages.elements_page import TextBoxPage
 from pages.elements_page import AuthBoxPage
 
+
 class TestElements:
     class TestTextBox:
 
@@ -19,9 +20,6 @@ class TestElements:
             text_box_page.fill_auth_box()
             text_box_page.check_auth_form()
             print(text_box_page.check_auth_form())
-
-
-
 
         # def test_input_proposed_password(self, driver):
         #     text_box_page = TextBoxPage(driver, 'http://localhost/litecart/create_account')
