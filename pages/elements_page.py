@@ -1,4 +1,5 @@
 from locators.elements_page_locators import TextBoxPageLocators
+from locators.elements_page_locators import AuthBoxPageLocators
 from pages.base_page import BasePage
 import time
 
@@ -49,3 +50,13 @@ class TextBoxPage(BasePage):
         checkbox_2 = self.element_is_visible(self.locators.CHECKBOX_2).get_attribute('checked')
 
         return company, tax_id, first_name, last_name, adress1, adress2, postal_code, email, city, phone, desired_password, confirm_password, captcha, checkbox_1, checkbox_2
+
+class AuthBoxPage(BasePage):
+    locators = AuthBoxPageLocators()
+
+    def fill_auth_box(self):
+        pass
+
+    def check_auth_form(self):
+        pass
+

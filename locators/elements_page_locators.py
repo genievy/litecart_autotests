@@ -26,7 +26,13 @@ class TextBoxPageLocators:
     CREATE_ACCOUNT_BUTTON = (By.CSS_SELECTOR, "[value='Create Account']")
     NAME_OWNER = (By.CSS_SELECTOR, "li.account.dropdown>a")
 
-class ListBoxPageLocators:
+class AuthBoxPageLocators:
+    # sign_in
+    SIGN_IN_DROPDOWN = (By.CSS_SELECTOR, "li.account.dropdown")
+    SIGN_IN_BUTTON = (By.CSS_SELECTOR, ".btn-group.btn-block>.btn.btn-default")
+    EMAIL = (By.CSS_SELECTOR, "form[name='login_form']>div.form-group.required>div>input")
+    PASSWORD = (By.XPATH, "//i[@class='fa fa-key fa-fw']/../..//input")
+
     pass
 
 
