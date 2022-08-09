@@ -1,6 +1,7 @@
 from locators.elements_page_locators import TextBoxPageLocators
 from locators.elements_page_locators import AuthBoxPageLocators
 from pages.base_page import BasePage
+from generators.generator import random_custumer
 import time
 
 
@@ -8,25 +9,42 @@ class TextBoxPage(BasePage):
     locators = TextBoxPageLocators()
 
     def fill_textboxes(self):
-        self.element_is_visible(self.locators.COMPANY).send_keys('Company')
-        self.element_is_visible(self.locators.TAX_ID).send_keys('2346556')
-        self.element_is_visible(self.locators.FIRST_NAME).send_keys('Oleg')
-        self.element_is_visible(self.locators.LAST_NAME).send_keys('Kuznec')
-        self.element_is_visible(self.locators.ADDRESS_1).send_keys('Gogol, 27')
-        self.element_is_visible(self.locators.ADDRESS_2).send_keys('Gogol, 27')
-        self.element_is_visible(self.locators.POSTAL_CODE).send_keys('109112')
-        self.element_is_visible(self.locators.CITY).send_keys('Moscow')
-        self.element_is_visible(self.locators.EMAIL).send_keys('test@test.test')
-        self.element_is_visible(self.locators.PHONE).send_keys('+79429899889')
+        # person_info - переменная, которой присваивается значение ф-ции random_custumer()
+        # всякий раз при обращении к ней
+        custumer_info = next(random_custumer())
+        # создаем набор значений для заполнения полей ввода (оптимизировать!)
+        company = custumer_info.company
+        tax_id = custumer_info.tax_id
+        first_name = custumer_info.first_name
+        last_name = custumer_info.last_name
+        address_1 = custumer_info.address_2
+        address_2 = custumer_info.company
+        postal_code = custumer_info.postal_code
+        city = custumer_info.city
+        email = custumer_info.email
+        phone = custumer_info.phone
+        password = custumer_info.password
+        captcha = custumer_info.captcha
+
+        self.element_is_visible(self.locators.COMPANY).send_keys(company)
+        self.element_is_visible(self.locators.TAX_ID).send_keys(tax_id)
+        self.element_is_visible(self.locators.FIRST_NAME).send_keys(first_name)
+        self.element_is_visible(self.locators.LAST_NAME).send_keys(last_name)
+        self.element_is_visible(self.locators.ADDRESS_1).send_keys(address_1)
+        self.element_is_visible(self.locators.ADDRESS_2).send_keys(address_2)
+        self.element_is_visible(self.locators.POSTAL_CODE).send_keys(postal_code)
+        self.element_is_visible(self.locators.CITY).send_keys(city)
+        self.element_is_visible(self.locators.EMAIL).send_keys(email)
+        self.element_is_visible(self.locators.PHONE).send_keys(phone)
         self.action_move_to_element(self.element_is_visible(self.locators.DESIRED_PASSWORD))
         self.action_click_and_hold(self.element_is_visible(self.locators.DESIRED_PASSWORD))
         time.sleep(1)
         self.action_release(self.element_is_visible(self.locators.DESIRED_PASSWORD))
-        self.element_is_visible(self.locators.DESIRED_PASSWORD).send_keys('Password123')
-        self.element_is_presence(self.locators.CONFIRM_PASSWORD).send_keys('Password123')
-        self.element_is_visible(self.locators.CAPTCHA).send_keys('5432')
+        self.element_is_visible(self.locators.DESIRED_PASSWORD).send_keys(password)
+        self.element_is_presence(self.locators.CONFIRM_PASSWORD).send_keys(password)
+        self.element_is_visible(self.locators.CAPTCHA).send_keys(captcha)
         # "Включается" чек-бох, исполнением javascript-кода
-        self.checbox_switch(self.locators.CHECKBOX_1_JS)
+        self.checkbox_switch(self.locators.CHECKBOX_1_JS)
         # "Включается" чек-бох, методом click()
         self.element_is_visible(self.locators.CHECKBOX_2).click()
         self.go_to_element(self.element_is_visible(self.locators.CREATE_ACCOUNT_BUTTON))
@@ -52,6 +70,7 @@ class TextBoxPage(BasePage):
 
         return company, tax_id, first_name, last_name, adress1, adress2, postal_code, email, city, phone, desired_password, confirm_password, captcha, checkbox_1, checkbox_2
 
+
 class AuthBoxPage(BasePage):
     locators = AuthBoxPageLocators()
 
@@ -59,10 +78,9 @@ class AuthBoxPage(BasePage):
         self.element_is_visible(self.locators.SIGN_IN_DROPDOWN).click()
         self.element_is_visible(self.locators.EMAIL).send_keys('test@test.test')
         self.element_is_visible(self.locators.PASSWORD).send_keys('Password123')
-        self.checbox_switch(self.locators.CHECKBOX_JS)
+        self.checkbox_switch(self.locators.CHECKBOX_JS)
         # self.element_is_visible(self.locators.SIGN_IN_BUTTON).click()
         time.sleep(3)
-
 
     def check_auth_form(self):
         email = self.element_is_visible(self.locators.EMAIL).get_attribute('value')
@@ -70,4 +88,3 @@ class AuthBoxPage(BasePage):
         checkbox = self.element_is_visible(self.locators.CHECKBOX).get_attribute('checked')
 
         return email, password, checkbox
-
