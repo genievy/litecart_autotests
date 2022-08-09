@@ -1,3 +1,4 @@
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -10,6 +11,10 @@ class BasePage:
     def open(self):
         return self.driver.get(self.url)
 
+    def find_element(self, element):
+        self.driver.find_element(element)
+
+    # Expected_conditions func
     def element_is_visible(self, locator, timeout=5):
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
@@ -31,17 +36,39 @@ class BasePage:
     def find_captcha(self, locator, timeout=5):
         return wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
 
+
+    # Execute_script func
+    def checbox_switch(self, js_locator):
+        scrpt = f'document.querySelector("{js_locator}").checked = true'
+        self.driver.execute_script(scrpt)
+
     def go_to_element(self, element):
-        self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight)", element)
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
-    # def get_element_properties(self, element):
-    #     self.driver.execute_script('get.textContent', element)
+    def title_is(self):
+        self.driver.execute_script("return document.querySelectorAll('title')[0]")
 
-    # def alert_is_present(self, timeout=5):
-    #     return wait(self.driver, timeout).until(EC.alert_is_present())
+    def go_to_page_down(self):
+        self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
 
-    # def alert_switch(self):
-    #     return self.driver.switch_to.alert
 
-    # def finding_element(self, locator):
-    #     self.driver.find_element(locator)
+    # ActionChains func
+    def action_move_to_element(self, element):
+        action = ActionChains(self.driver)
+        action.move_to_element(element)
+        action.perform()
+
+    def action_left_click(self, element):
+        action = ActionChains(self.driver)
+        action.click(element)
+        action.perform()
+
+    def action_click_and_hold(self, element):
+        action = ActionChains(self.driver)
+        action.click_and_hold(element)
+        action.perform()
+
+    def action_release(self, element):
+        action = ActionChains(self.driver)
+        action.release(element)
+        action.perform()

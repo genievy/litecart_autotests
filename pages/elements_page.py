@@ -1,46 +1,73 @@
 from locators.elements_page_locators import TextBoxPageLocators
-from locators.elements_page_locators import CheckBoxPageLocators
-from locators.elements_page_locators import ButtonsPageLocators
-from locators.elements_page_locators import AlertPageLocators
+from locators.elements_page_locators import AuthBoxPageLocators
 from pages.base_page import BasePage
 import time
 
 
 class TextBoxPage(BasePage):
-    locators1 = TextBoxPageLocators()
-    locators2 = CheckBoxPageLocators()
-    locators3 = ButtonsPageLocators()
-    locators4 = AlertPageLocators()
+    locators = TextBoxPageLocators()
 
     def fill_textboxes(self):
-        self.element_is_visible(self.locators1.COMPANY).send_keys('Company')
-        self.element_is_visible(self.locators1.TAX_ID).send_keys('1234567890')
-        self.element_is_visible(self.locators1.FIRST_NAME).send_keys('Oleg')
-        self.element_is_visible(self.locators1.LAST_NAME).send_keys('Kuznetsov')
-        self.element_is_visible(self.locators1.ADDRESS_1).send_keys('Gogolya, 7')
-        self.element_is_visible(self.locators1.ADDRESS_2).send_keys('Gogolya, 7')
-        self.element_is_visible(self.locators1.POSTAL_CODE).send_keys('176789')
-        self.element_is_visible(self.locators1.CITY).send_keys('Moscow')
-        # self.element_is_visible(self.locators1.COUNTRY_SELECT).click()
-        # self.element_is_visible(self.locators1.COUNTRY_OPTION).click()
-        # self.element_is_visible(self.locators1.ZONE_STATE_PROVINCE).send_keys('qerqw')
-        self.element_is_visible(self.locators1.EMAIL).send_keys('qwe@qwe.qwe')
-        self.element_is_visible(self.locators1.PHONE).send_keys('+79453456789')
-        self.element_is_visible(self.locators1.DESIRED_PASSWORD).send_keys('auSrL3iW3wzCkRk')
-        self.element_is_presence(self.locators1.CONFIRM_PASSWORD).send_keys('auSrL3iW3wzCkRk')
-        self.element_is_visible(self.locators1.CAPTCHA).send_keys('5432')
-        self.element_is_visible(self.locators2.CHECKBOX_1).click()
-        self.element_is_visible(self.locators2.CHECKBOX_2).click()
-        self.go_to_element(self.locators3.CREATE_ACCOUNT_BUTTON)
-        self.element_is_presence(self.locators3.CREATE_ACCOUNT_BUTTON).click()
-        # self.alert_is_present()
+        self.element_is_visible(self.locators.COMPANY).send_keys('Company')
+        self.element_is_visible(self.locators.TAX_ID).send_keys('2346556')
+        self.element_is_visible(self.locators.FIRST_NAME).send_keys('Oleg')
+        self.element_is_visible(self.locators.LAST_NAME).send_keys('Kuznec')
+        self.element_is_visible(self.locators.ADDRESS_1).send_keys('Gogol, 27')
+        self.element_is_visible(self.locators.ADDRESS_2).send_keys('Gogol, 27')
+        self.element_is_visible(self.locators.POSTAL_CODE).send_keys('109112')
+        self.element_is_visible(self.locators.CITY).send_keys('Moscow')
+        self.element_is_visible(self.locators.EMAIL).send_keys('test@test.test')
+        self.element_is_visible(self.locators.PHONE).send_keys('+79429899889')
+        self.action_move_to_element(self.element_is_visible(self.locators.DESIRED_PASSWORD))
+        self.action_click_and_hold(self.element_is_visible(self.locators.DESIRED_PASSWORD))
         time.sleep(1)
+        self.action_release(self.element_is_visible(self.locators.DESIRED_PASSWORD))
+        self.element_is_visible(self.locators.DESIRED_PASSWORD).send_keys('Password123')
+        self.element_is_presence(self.locators.CONFIRM_PASSWORD).send_keys('Password123')
+        self.element_is_visible(self.locators.CAPTCHA).send_keys('5432')
+        # "Включается" чек-бох, исполнением javascript-кода
+        self.checbox_switch(self.locators.CHECKBOX_1_JS)
+        # "Включается" чек-бох, методом click()
+        self.element_is_visible(self.locators.CHECKBOX_2).click()
+        self.go_to_element(self.element_is_visible(self.locators.CREATE_ACCOUNT_BUTTON))
+        # self.element_is_presence(self.locators.CREATE_ACCOUNT_BUTTON).click()
+        time.sleep(3)
+
+    def check_filled_form(self):
+        company = self.element_is_visible(self.locators.COMPANY).get_attribute('value')
+        tax_id = self.element_is_visible(self.locators.TAX_ID).get_attribute('value')
+        first_name = self.element_is_visible(self.locators.COMPANY).get_attribute('value')
+        last_name = self.element_is_visible(self.locators.LAST_NAME).get_attribute('value')
+        adress1 = self.element_is_visible(self.locators.ADDRESS_1).get_attribute('value')
+        adress2 = self.element_is_visible(self.locators.ADDRESS_2).get_attribute('value')
+        postal_code = self.element_is_visible(self.locators.POSTAL_CODE).get_attribute('value')
+        city = self.element_is_visible(self.locators.CITY).get_attribute('value')
+        email = self.element_is_visible(self.locators.EMAIL).get_attribute('value')
+        phone = self.element_is_visible(self.locators.PHONE).get_attribute('value')
+        desired_password = self.element_is_visible(self.locators.DESIRED_PASSWORD).get_attribute('value')
+        confirm_password = self.element_is_visible(self.locators.CONFIRM_PASSWORD).get_attribute('value')
+        captcha = self.element_is_visible(self.locators.CAPTCHA).get_attribute('value')
+        checkbox_1 = self.element_is_visible(self.locators.CHECKBOX_1).get_attribute('checked')
+        checkbox_2 = self.element_is_visible(self.locators.CHECKBOX_2).get_attribute('checked')
+
+        return company, tax_id, first_name, last_name, adress1, adress2, postal_code, email, city, phone, desired_password, confirm_password, captcha, checkbox_1, checkbox_2
+
+class AuthBoxPage(BasePage):
+    locators = AuthBoxPageLocators()
+
+    def fill_auth_box(self):
+        self.element_is_visible(self.locators.SIGN_IN_DROPDOWN).click()
+        self.element_is_visible(self.locators.EMAIL).send_keys('test@test.test')
+        self.element_is_visible(self.locators.PASSWORD).send_keys('Password123')
+        self.checbox_switch(self.locators.CHECKBOX_JS)
+        # self.element_is_visible(self.locators.SIGN_IN_BUTTON).click()
+        time.sleep(3)
 
 
-    def check_alert(self):
-        try:
-            text_alert = self.find_captcha(self.locators4.CAPTCHA_ALERT).get_attribute('textContent')
-            if text_alert.strip() == "Invalid CAPTCHA given":
-                print(text_alert.strip())
-        except:
-            print("Invalid input data")
+    def check_auth_form(self):
+        email = self.element_is_visible(self.locators.EMAIL).get_attribute('value')
+        password = self.element_is_visible(self.locators.PASSWORD).get_attribute('value')
+        checkbox = self.element_is_visible(self.locators.CHECKBOX).get_attribute('checked')
+
+        return email, password, checkbox
+
