@@ -68,6 +68,7 @@ class TextBoxPage(BasePage):
         desired_password = self.element_is_visible(self.locators.DESIRED_PASSWORD).get_attribute('value')
         confirm_password = self.element_is_visible(self.locators.CONFIRM_PASSWORD).get_attribute('value')
         captcha = self.element_is_visible(self.locators.CAPTCHA).get_attribute('value')
+        # Здесь получаем состояние checkbox не из атрибутов, а из Properties элемента
         checkbox_1 = self.element_is_visible(self.locators.CHECKBOX_1).get_attribute('checked')
         checkbox_2 = self.element_is_visible(self.locators.CHECKBOX_2).get_attribute('checked')
 
@@ -94,6 +95,6 @@ class AuthBoxPage(BasePage):
     def check_auth_form(self):
         email = self.element_is_visible(self.locators.EMAIL).get_attribute('value')
         password = self.element_is_visible(self.locators.PASSWORD).get_attribute('value')
+        # Здесь получаем состояние checkbox не из атрибутов, а из Properties элемента
         checkbox = self.element_is_visible(self.locators.CHECKBOX).get_attribute('checked')
-        print(email, password, checkbox)
         return email, password, checkbox
