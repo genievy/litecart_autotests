@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 
 class TextBoxPageLocators:
     # create account
+    COOKIES = (By.CSS_SELECTOR, "[name='accept_cookies']")
     COMPANY = (By.CSS_SELECTOR, "[name='company']")
     TAX_ID = (By.CSS_SELECTOR, "[name='tax_id']")
     FIRST_NAME = (By.CSS_SELECTOR, "[name='firstname']")
@@ -19,27 +20,19 @@ class TextBoxPageLocators:
     CONFIRM_PASSWORD = (By.XPATH, "/html/body/div/main/div[2]/section/form/div[7]/div[2]/div/input")
     COUNTRY_OPTION = (By.CSS_SELECTOR, "select.form-control[value='BY']")
     CAPTCHA = (By.CSS_SELECTOR, "[name='captcha']")
-
-
-class CheckBoxPageLocators:
     CHECKBOX_1 = (By.CSS_SELECTOR, "[name='newsletter']")
+    CHECKBOX_1_JS = "[name=newsletter]"  # javascript-locator
     CHECKBOX_2 = (By.CSS_SELECTOR, "[name='terms_agreed']")
-
-
-class AlertPageLocators:
     CAPTCHA_ALERT = (By.CSS_SELECTOR, ".alert.alert-danger")
-
-
-class ButtonsPageLocators:
     CREATE_ACCOUNT_BUTTON = (By.CSS_SELECTOR, "[value='Create Account']")
+    NAME_OWNER = (By.CSS_SELECTOR, "li.account.dropdown>a")
 
+class AuthBoxPageLocators:
+    # sign_in
+    SIGN_IN_DROPDOWN = (By.CSS_SELECTOR, "li.account.dropdown")
+    EMAIL = (By.CSS_SELECTOR, "form[name='login_form']>div.form-group.required>div>input")
+    PASSWORD = (By.XPATH, "//i[@class='fa fa-key fa-fw']/../..//input")
+    CHECKBOX = (By.CSS_SELECTOR, "[name='remember_me']")
+    CHECKBOX_JS = "[name=remember_me]"  # javascript-locator
+    SIGN_IN_BUTTON = (By.CSS_SELECTOR, ".btn-group.btn-block>.btn.btn-default")
 
-class ListBoxPageLocators:
-    pass
-
-
-class LinksPageLocators:
-    pass
-
-class NewBoxPageLocators:
-    pass
