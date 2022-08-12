@@ -12,13 +12,9 @@ class TestElements:
         def test_registration_text_boxes(self, driver):
             text_box_page = TextBoxPage(driver, 'http://localhost/litecart/create_account')
             text_box_page.open()
-            # text_box_page.fill_textboxes()
-            # text_box_page.check_filled_form()
-            # print(text_box_page.fill_textboxes())
-            # print(text_box_page.check_filled_form())
             assert text_box_page.fill_textboxes() == text_box_page.check_filled_form(), 'Inputs do not match outputs'
 
-        def test_registration_check_boxes(self,driver):
+        def test_registration_check_boxes(self, driver):
             pass
 
     @allure.feature('Testing the authentication page')
@@ -30,4 +26,3 @@ class TestElements:
             text_box_page.fill_auth_box()
             text_box_page.check_auth_form()
             print(text_box_page.check_auth_form())
-

@@ -19,19 +19,19 @@ class BasePage:
 
     # Expected_conditions func
     @allure.step('Return element if visible')
-    def element_is_visible(self, locator, timeout=5):
+    def element_visible(self, locator, timeout=5):
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
     @allure.step('Return elements if visible')
-    def elements_is_visible(self, locator, timeout=5):
+    def elements_visible(self, locator, timeout=5):
         return wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
 
     @allure.step('Return element if presence')
-    def element_is_presence(self, locator, timeout=5):
+    def element_presence(self, locator, timeout=5):
         return wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
 
     @allure.step('Return element if clickable')
-    def element_is_clickable(self, locator, timeout=5):
+    def element_clickable(self, locator, timeout=5):
         return wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
 
     # Execute_script func
