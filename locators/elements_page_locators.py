@@ -27,6 +27,7 @@ class TextBoxPageLocators:
     CREATE_ACCOUNT_BUTTON = (By.CSS_SELECTOR, "[value='Create Account']")
     NAME_OWNER = (By.CSS_SELECTOR, "li.account.dropdown>a")
 
+
 class AuthBoxPageLocators:
     # sign_in
     SIGN_IN_DROPDOWN = (By.CSS_SELECTOR, "li.account.dropdown")
@@ -35,4 +36,3 @@ class AuthBoxPageLocators:
     CHECKBOX = (By.CSS_SELECTOR, "[name='remember_me']")
     CHECKBOX_JS = "[name=remember_me]"  # javascript-locator
     SIGN_IN_BUTTON = (By.CSS_SELECTOR, ".btn-group.btn-block>.btn.btn-default")
-

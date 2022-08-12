@@ -36,9 +36,8 @@ class BasePage:
     def find_captcha(self, locator, timeout=5):
         return wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
 
-
     # Execute_script func
-    def checbox_switch(self, js_locator):
+    def checkbox_switch(self, js_locator):
         scrpt = f'document.querySelector("{js_locator}").checked = true'
         self.driver.execute_script(scrpt)
 
@@ -50,7 +49,6 @@ class BasePage:
 
     def go_to_page_down(self):
         self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
-
 
     # ActionChains func
     def action_move_to_element(self, element):
