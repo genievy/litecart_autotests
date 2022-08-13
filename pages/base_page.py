@@ -15,7 +15,7 @@ class BasePage:
 
     @allure.step('Find element')
     def find_element(self, element):
-        self.driver.find_element(element)
+        return self.driver.find_element(element)
 
     # Expected_conditions func
     @allure.step('Return element if visible')
@@ -42,11 +42,11 @@ class BasePage:
 
     @allure.step('Move to element`s position')
     def go_to_element(self, element):
-        self.driver.execute_script("arguments[0].scrollIntoView();", element)
+        return self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
     @allure.step('Return title')
     def title_is(self):
-        self.driver.execute_script("return document.querySelectorAll('title')[0]")
+        return self.driver.execute_script("return document.querySelectorAll('title')[0]")
 
     @allure.step('Scroll page down')
     def go_to_page_down(self):
